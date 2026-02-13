@@ -3,37 +3,94 @@ package board
 // RowContains prüft, ob die angegebene Zeile den gesuchten Wert enthält.
 func (b *Board) RowContains(i int, value string) bool {
 	// TODO
+	if i < 0 || i >= len(b.rows) {
+		return false
+	}
+	for _, cell := range b.rows[i] {
+		if cell == value {
+			return true
+		}
+	}
 	return false
 }
 
 // RowContainsChain prüft, ob die angegebene Zeile eine ununterbrochene Kette des gesuchten Werts enthält.
 func (b *Board) RowContainsChain(rowIndex int, value string, length int) bool {
 	// TODO
+	if rowIndex < 0 || rowIndex >= len(b.rows) {
+		return false
+	}
+	if length <= 0 {
+		return true
+	}
+	row := b.rows[rowIndex]
+	count := 0
+	for _, cell := range row {
+		if cell == value {
+			count++
+			if count >= length {
+				return true
+			}
+		} else {
+			count = 0
+		}
+	}
 	return false
 }
 
-// RowContainsOnly prüft, ob die angegebene Zeile ausschließlich den gesuchten Wert enthält.
+// RowContainsOnly prüft, ob die angegebene Zeile ausschließlich den gesuchten Wert enthält. Einzeiler!
 func (b *Board) RowContainsOnly(rowIndex int, value string) bool {
 	// TODO
-	return false
+	return b.RowContainsChain(rowIndex, value, len(b.rows))
 }
 
 // ColContains prüft, ob die angegebene Spalte den gesuchten Wert enthält.
 func (b *Board) ColContains(colIndex int, value string) bool {
 	// TODO
+	if colIndex < 0 {
+		return false
+	}
+	for _, row := range b.rows {
+		if colIndex >= len(row) {
+			continue
+		}
+		if row[colIndex] == value {
+			return true
+		}
+	}
 	return false
 }
 
 // ColContainsChain prüft, ob die angegebene Spalte eine ununterbrochene Kette des gesuchten Werts enthält.
 func (b *Board) ColContainsChain(colIndex int, value string, length int) bool {
 	// TODO
+	if colIndex < 0 {
+		return false
+	}
+	if length <= 0 {
+		return true
+	}
+	count := 0
+	for _, row := range b.rows {
+		if colIndex >= len(row) {
+			continue
+		}
+		if row[colIndex] == value {
+			count++
+			if count >= length {
+				return true
+			}
+		} else {
+			count = 0
+		}
+	}
 	return false
 }
 
 // ColContainsOnly prüft, ob die angegebene Spalte ausschließlich den gesuchten Wert enthält.
 func (b *Board) ColContainsOnly(colIndex int, value string) bool {
 	// TODO
-	return false
+	return b.ColContainsChain(colIndex, value, len(b.rows))
 }
 
 // DiagDownRightContains prüft, ob die angegebene Diagonale von oben links nach unten rechts den gesuchten Wert enthält.

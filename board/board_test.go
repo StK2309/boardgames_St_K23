@@ -78,4 +78,7 @@ func ExampleBoard_Set() {
 	b.Set(2, 3, "10")
 
 	fmt.Println(b == NewWithNumbers(3, 3))
+
+	// Output:
+
 }

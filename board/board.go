@@ -42,12 +42,26 @@ func NewWithNumbers(rows, cols int) *Board {
 // Get liefert den Inhalt der Zelle an der angegebenen Position zurück.
 // Liefert einen leeren String, falls die Position außerhalb des Spielfelds liegt.
 func (b *Board) Get(row, col int) string {
-	// TODO
-	return ""
+	switch {
+	case row < 0, row >= len(b.rows):
+		return ""
+	case col < 0, col >= len(b.rows[row]):
+		return ""
+	default:
+		return b.rows[row][col]
+	}
 }
 
 // Set setzt den Inhalt der Zelle an der angegebenen Position auf den angegebenen Wert.
 // Ignoriert die Anweisung, falls die Position außerhalb des Spielfelds liegt.
 func (b *Board) Set(row, col int, value string) {
 	// TODO
+	switch {
+	case row < 0, row >= len(b.rows):
+		return
+	case col < 0, col >= len(b.rows[row]):
+		return
+	default:
+		b.rows[row][col] = value
+	}
 }
