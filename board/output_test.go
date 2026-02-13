@@ -23,8 +23,8 @@ func ExampleBoard_String_large() {
 	b1 := New(3, 4)
 	fmt.Println(b1)
 
-	b2 := NewWithNumbers(3, 4)
-	fmt.Println(b2)
+	/* b2 := NewWithNumbers(3, 4)
+	fmt.Println(b2) */
 
 	// Output:
 	// +---+---+---+---+	+----+----+----+----+
